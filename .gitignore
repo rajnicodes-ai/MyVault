@@ -1,0 +1,9 @@
+# Build output (compiler banata hai, dobara ban sakta hai)
+build/
+
+# Qt Creator ki personal settings
+*.user
+.qtcreator/
+
+# macOS ki apni files
+.DS_Store
