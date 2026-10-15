@@ -1,109 +1,61 @@
-#include <iostream>
-
 #include "domain/Entry.h"
-#include <vector>
+#include "domain/Vault.h"
+
+#include <iostream>
 #include <string>
 
-
-
-void addEntry (std::vector<Entry> &entries,
-              const std::string &title,
-              const std::string &username,
-              const std::string &password,
-              const std::string &category,
-              bool favorite)
+Entry makeEntry(const std::string &title,
+                const std::string &username,
+                const std::string &password,
+                const std::string &category,
+                bool favorite)
 {
-
-
     Entry e(title, username, password);
     e.setCategory(category);
     e.setFavorite(favorite);
-    entries.push_back(e);
-
+    return e;
 }
 
-void printEntry (std::size_t number, const Entry &e){
-
+void printEntry(std::size_t number, const Entry &e)
+{
     std::cout << number << ". " << e.title();
-
-    if(e.isFavorite())
-        std::cout << "(favorite)";
-    std::cout<< "\n";
-
-    std::cout << " " << e.username() << " | " << e. category() << "\n";
+    if (e.isFavorite())
+        std::cout << "  (favorite)";
+    std::cout << "\n";
+    std::cout << "   " << e.username() << "  |  " << e.category() << "\n";
 }
 
-void printEntries(const std::vector<Entry> &entries){
+void printVault(const Vault &vault)
+{
+    std::cout << "Total passwords: " << vault.size() << "\n\n";
 
-    std::cout << "Total Passwords: " << entries.size() << "\n\n";
-
+    const std::vector<Entry> &entries = vault.entries();
     for (std::size_t i = 0; i < entries.size(); ++i)
-
         printEntry(i + 1, entries[i]);
 
-
+    std::cout << "\nFavorites: " << vault.favoriteCount() << "\n";
 }
 
-int countFavorites(const std::vector<Entry> &entries)
+int main()
 {
+    Vault vault;
 
-    int count = 0;
+    vault.add(makeEntry("Gmail", "rajni@example.com", "test123", "Email", true));
+    vault.add(makeEntry("Facebook", "rajni.fb", "fb@2026", "Social", false));
+    vault.add(makeEntry("SBI Net Banking", "RAJNI1234", "Bank#9876", "Banking", true));
+    vault.add(makeEntry("Netflix", "rajni@example.com", "Movie!42", "Entertainment", false));
 
-    for(const Entry &e : entries)
-    {
-        if(e.isFavorite())
-            ++count;
-    }
+    std::cout << "MyVault v0.1.0\n";
+    printVault(vault);
 
-    return count;
-}
+    if (!vault.add(makeEntry("Gmail", "doosra@example.com", "abc", "Email", false)))
+        std::cout << "\nGmail pehle se hai, dobara nahi juda!\n";
 
-bool findEntry(const std::vector<Entry> &entries, const std::string &title)
-{
+    if (vault.remove("Facebook"))
+        std::cout << "Facebook hata diya\n";
 
-    for (const Entry &e : entries){
-        if(e.title() == title)
-            return true;
-    }
-
-    return false;
-}
-
-int main(){
-
-    std::vector<Entry> entries;
-
-    addEntry(entries, "Gmail", "rajni@example.com", "test@123", "Email", true);
-    addEntry(entries, "Facebook", "rajni.fb", "fb@2026","Social", false);
-    addEntry(entries, "SBI net Banking", "RAJNI1234", "Bank#123", "Banking", true);
-    addEntry(entries, "Netfilx", "rajni@example.com", "Movie!42", "Entertainment", false);
-
-    std::cout << "My vault v0.1.0\n";
-    printEntries(entries);
-
-    std::cout << "\nFavorites: " << countFavorites(entries)<< "\n\n";
-
-    if (findEntry(entries, "Facebook"))
-        std::cout<< "Facebook  found\n";
-
-    else
-        std:: cout << "Facebook not found\n";
-
-    if(findEntry(entries, "Twitter"))
-        std::cout << "Twitter found\n";
-
-    else
-        std::cout << "Twitter not found\n";
-
-
-
-
-
-    Entry test("Test", "User", "abc");
-
-    if (!test.setPassword(""))
-        std::cout << "Khali password mana hai !\n";
+    std::cout << "\nAb:\n";
+    printVault(vault);
 
     return 0;
-
 }
