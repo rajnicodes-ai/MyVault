@@ -9,12 +9,7 @@ class Entry {
 
 public:
 
-    Entry (const std::string &title, const std::string &username, const std::string &password)
-        : m_title(title)
-        ,m_username(username)
-        ,m_password(password)
-    {
-    }
+    Entry(const std::string &title, const std::string &username, const std::string &password);
 
     // Getter: only read
 
@@ -35,20 +30,12 @@ public:
 
     //setters: badalne ke rules
 
-    bool setPassword (const std:: string &password)
-    {
-        if (password .empty())
-            return false;
+    bool setPassword (const std::string &password);
 
-        m_password = password;
-
-        return true;
-    }
-
-    void setWebsite(const std::string &website){m_website = website;}
-    void setCategory(const std:: string &category){m_category = category;}
-    void setNotes(const std:: string &notes){m_notes = notes;}
-    void setFavorite(bool favorite){m_favorite = favorite;}
+    void setWebsite(const std::string &website);
+    void setCategory(const std::string &category);
+    void setNotes(const std::string &notes);
+    void setFavorite(bool favorite);
 
 private:
 
