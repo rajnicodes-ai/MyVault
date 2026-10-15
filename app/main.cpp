@@ -47,6 +47,20 @@ void printEntries(const std::vector<Entry> &entries){
 
 }
 
+int countFavorites(const std::vector<Entry> &entries)
+{
+
+    int count = 0;
+
+    for(const Entry &e : entries)
+    {
+        if(e.favorite)
+            ++count;
+    }
+
+    return count;
+}
+
 int main(){
 
     std::vector<Entry> entries;
@@ -58,6 +72,8 @@ int main(){
 
     std::cout << "My vault v0.1.0\n";
     printEntries(entries);
+
+    std::cout << "\nFavorites: " << countFavorites(entries)<< "\n";
 
     return 0;
 
