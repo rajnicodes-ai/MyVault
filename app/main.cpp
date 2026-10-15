@@ -15,25 +15,22 @@ void addEntry (std::vector<Entry> &entries,
 {
 
 
-    Entry e;
-    e.title = title;
-    e.username = username;
-    e.password = password;
-    e.category = category;
-    e.favorite = favorite;
+    Entry e(title, username, password);
+    e.setCategory(category);
+    e.setFavorite(favorite);
     entries.push_back(e);
 
 }
 
 void printEntry (std::size_t number, const Entry &e){
 
-    std::cout << number << ". " << e.title;
+    std::cout << number << ". " << e.title();
 
-    if(e.favorite)
+    if(e.isFavorite())
         std::cout << "(favorite)";
     std::cout<< "\n";
 
-    std::cout << " " << e.username << " | " << e. category << "\n";
+    std::cout << " " << e.username() << " | " << e. category() << "\n";
 }
 
 void printEntries(const std::vector<Entry> &entries){
@@ -54,7 +51,7 @@ int countFavorites(const std::vector<Entry> &entries)
 
     for(const Entry &e : entries)
     {
-        if(e.favorite)
+        if(e.isFavorite())
             ++count;
     }
 
@@ -65,7 +62,7 @@ bool findEntry(const std::vector<Entry> &entries, const std::string &title)
 {
 
     for (const Entry &e : entries){
-        if(e.title == title)
+        if(e.title() == title)
             return true;
     }
 
@@ -97,6 +94,15 @@ int main(){
 
     else
         std::cout << "Twitter not found\n";
+
+
+
+
+
+    Entry test("Test", "User", "abc");
+
+    if (!test.setPassword(""))
+        std::cout << "Khali password mana hai !\n";
 
     return 0;
 
