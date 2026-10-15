@@ -61,6 +61,17 @@ int countFavorites(const std::vector<Entry> &entries)
     return count;
 }
 
+bool findEntry(const std::vector<Entry> &entries, const std::string &title)
+{
+
+    for (const Entry &e : entries){
+        if(e.title == title)
+            return true;
+    }
+
+    return false;
+}
+
 int main(){
 
     std::vector<Entry> entries;
@@ -73,7 +84,19 @@ int main(){
     std::cout << "My vault v0.1.0\n";
     printEntries(entries);
 
-    std::cout << "\nFavorites: " << countFavorites(entries)<< "\n";
+    std::cout << "\nFavorites: " << countFavorites(entries)<< "\n\n";
+
+    if (findEntry(entries, "Facebook"))
+        std::cout<< "Facebook  found\n";
+
+    else
+        std:: cout << "Facebook not found\n";
+
+    if(findEntry(entries, "Twitter"))
+        std::cout << "Twitter found\n";
+
+    else
+        std::cout << "Twitter not found\n";
 
     return 0;
 
