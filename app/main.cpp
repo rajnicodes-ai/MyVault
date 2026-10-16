@@ -33,6 +33,8 @@ void printVault(const Vault &vault)
     for (std::size_t i = 0; i < entries.size(); ++i)
         printEntry(i + 1, entries[i]);
 
+    std::cout << "Banking:" << vault.countCategory(Category::Banking) << "\n";
+
     std::cout << "\nFavorites: " << vault.favoriteCount() << "\n";
 }
 

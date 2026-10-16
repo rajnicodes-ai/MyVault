@@ -49,3 +49,18 @@ int Vault::favoriteCount() const
     }
     return count;
 }
+
+int Vault::countCategory(Category category) const
+{
+
+    int count = 0;
+
+    for (const Entry &e : m_entries)
+    {
+        if (e.category() == category)
+        {
+            ++count;
+        }
+    }
+    return count;
+}

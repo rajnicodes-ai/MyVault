@@ -28,6 +28,8 @@ public:
         return m_entries;
     }
 
+    int countCategory(Category category) const;
+
 
 
 private:
