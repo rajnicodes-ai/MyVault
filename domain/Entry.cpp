@@ -1,4 +1,5 @@
 #include "domain/Entry.h"
+#include "domain/TextUtils.h"
 
 
 Entry::Entry(const std::string &title, const std::string &username, const std::string &password)
@@ -10,7 +11,7 @@ Entry::Entry(const std::string &title, const std::string &username, const std::s
 
 bool Entry::setPassword(const std::string &password)
 {
-    if (password.empty())
+    if (isBlank(password))
         return false;
 
     m_password = password;

@@ -13,6 +13,8 @@ add_executable(myvault app/main.cpp
     domain/Vault.cpp
     domain/Category.h
     domain/Category.cpp
+    domain/TextUtils.h
+    domain/TextUtils.cpp
 
 )
 

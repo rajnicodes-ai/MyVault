@@ -38,6 +38,23 @@ void printVault(const Vault &vault)
     std::cout << "\nFavorites: " << vault.favoriteCount() << "\n";
 }
 
+void tryAdd(Vault &vault, const Entry &entry)
+{
+    AddResult result = vault.add(entry);
+    std::cout << "\"" << entry.title() << "\": " << toString(result) << "\n";
+}
+
+void printFound(const Vault &vault, const std::string &title)
+{
+    std:: optional<Entry> found = vault.find(title);
+
+    if (found)
+        std::cout << title << "mila:" << found -> username() << "\n";
+
+    else
+        std:: cout << title << " nhi mila\n";
+}
+
 int main()
 {
     Vault vault;
@@ -48,10 +65,22 @@ int main()
     vault.add(makeEntry("Netflix", "rajni@example.com", "Movie!42", Category::Entertainment, false));
 
     std::cout << "MyVault v0.1.0\n";
+
     printVault(vault);
 
-    if (!vault.add(makeEntry("Gmail", "doosra@example.com", "abc", Category::Email, false)))
-        std::cout << "\nGmail pehle se hai, dobara nahi juda!\n";
+    std::cout << "\n--- Galat entries jodne ki koshish ---\n";
+
+    tryAdd(vault, makeEntry("Gmail", "doosra@example.com", "abc", Category::Email, false));
+    tryAdd(vault, makeEntry("   ", "koi@example.com", "abc", Category::Other, false));
+    tryAdd(vault, makeEntry("Amazon", "rajni@example.com", "   ", Category::Shopping, false));
+
+
+    std::cout << "\n----Find-----\n";
+    printFound(vault, "Netflix");
+    printFound(vault,"Twitter");
+
+
+    std::cout << "\n";
 
     if (vault.remove("Facebook"))
         std::cout << "Facebook hata diya\n";
