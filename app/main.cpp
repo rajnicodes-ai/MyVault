@@ -7,7 +7,7 @@
 Entry makeEntry(const std::string &title,
                 const std::string &username,
                 const std::string &password,
-                const std::string &category,
+                Category category,
                 bool favorite)
 {
     Entry e(title, username, password);
@@ -22,7 +22,7 @@ void printEntry(std::size_t number, const Entry &e)
     if (e.isFavorite())
         std::cout << "  (favorite)";
     std::cout << "\n";
-    std::cout << "   " << e.username() << "  |  " << e.category() << "\n";
+    std::cout << "   " << e.username() << "  |  " << toString(e.category()) << "\n";
 }
 
 void printVault(const Vault &vault)
@@ -40,15 +40,15 @@ int main()
 {
     Vault vault;
 
-    vault.add(makeEntry("Gmail", "rajni@example.com", "test123", "Email", true));
-    vault.add(makeEntry("Facebook", "rajni.fb", "fb@2026", "Social", false));
-    vault.add(makeEntry("SBI Net Banking", "RAJNI1234", "Bank#9876", "Banking", true));
-    vault.add(makeEntry("Netflix", "rajni@example.com", "Movie!42", "Entertainment", false));
+    vault.add(makeEntry("Gmail", "rajni@example.com", "test123", Category::Email, true));
+    vault.add(makeEntry("Facebook", "rajni.fb", "fb@2026", Category::Social, false));
+    vault.add(makeEntry("SBI Net Banking", "RAJNI1234", "Bank#9876", Category::Banking, true));
+    vault.add(makeEntry("Netflix", "rajni@example.com", "Movie!42", Category::Entertainment, false));
 
     std::cout << "MyVault v0.1.0\n";
     printVault(vault);
 
-    if (!vault.add(makeEntry("Gmail", "doosra@example.com", "abc", "Email", false)))
+    if (!vault.add(makeEntry("Gmail", "doosra@example.com", "abc", Category::Email, false)))
         std::cout << "\nGmail pehle se hai, dobara nahi juda!\n";
 
     if (vault.remove("Facebook"))

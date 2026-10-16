@@ -23,7 +23,7 @@ void Entry::setWebsite(const std::string &website)
     m_website = website;
 }
 
-void Entry::setCategory(const std::string &category)
+void Entry::setCategory(Category category)
 {
     m_category = category;
 }

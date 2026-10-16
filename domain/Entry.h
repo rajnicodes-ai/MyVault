@@ -1,6 +1,8 @@
 
 #pragma once
 
+#include "domain/Category.h"
+
 #include <string>
 
 //Ek password entry : ek website ka login.
@@ -21,7 +23,7 @@ public:
 
     const std::string &website() const {return m_website;}
 
-    const std::string &category() const {return m_category;}
+     Category category() const {return m_category;}
 
     const std::string &notes() const {return m_notes;}
 
@@ -33,7 +35,7 @@ public:
     bool setPassword (const std::string &password);
 
     void setWebsite(const std::string &website);
-    void setCategory(const std::string &category);
+    void setCategory(Category category);
     void setNotes(const std::string &notes);
     void setFavorite(bool favorite);
 
@@ -43,7 +45,7 @@ private:
     std::string m_username;
     std::string m_password;
     std::string m_website;
-    std::string m_category;
+    Category m_category = Category::Other;
     std::string m_notes;
     bool m_favorite = false;
 
